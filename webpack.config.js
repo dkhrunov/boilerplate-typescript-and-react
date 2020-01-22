@@ -1,4 +1,5 @@
-const webpack = require("webpack");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	// Turn to production mode, when app will be done
@@ -11,25 +12,25 @@ module.exports = {
 
 	output: {
 		// Folder to store generated bundle
-		path: __dirname + "/dist",
+		path: path.join(__dirname, "/dist"),
 		// Name of generated bundle after build
-		filename: "bundle.js",
-		// Public URL of the output directory when referenced in a browser
-		publicPath: "/"
+		filename: "bundle.js"
 	},
 
 	resolve: {
-		// Add '.ts', '.tsx' as resolvable extensions.
+		// adding .ts and .tsx to resolve.extensions will help babel look for .ts and .tsx files to transpile
 		extensions: [".ts", ".tsx", ".js"]
 	},
 
 	module: {
 		rules: [
 			{
-				// Include ts, tsx, js, and jsx files.
-				test: /\.ts(x)?$/,
+				// Include ts, tsx, js and jsx files.
+				test: /\.(ts|js)x?$/,
 				exclude: /node_modules/,
-				loader: "ts-loader"
+				use: {
+					loader: 'babel-loader'
+				},
 			},
 			// Allow imports css file inside javascript files
 			{
@@ -44,6 +45,12 @@ module.exports = {
 			}
 		]
 	},
+
+	plugins: [
+		new HtmlWebpackPlugin({
+		  template: './index.html'
+		})
+	],
 
 	devServer: {
 		// Display only errors to reduce the amount of output.

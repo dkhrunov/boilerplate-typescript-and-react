@@ -1,5 +1,5 @@
-import * as React from "react";
-import "./style.css";
+import * as React from 'react';
+import './style.css';
 
 export interface HelloProps {
 	compiler: string;
@@ -7,7 +7,7 @@ export interface HelloProps {
 }
 
 // Function component
-// export const Hello = (props: HelloProps) => 
+// export const Hello = (props: HelloProps) =>
 // 	<h1>
 // 		Hello from {props.compiler} and {props.framework}!
 // 	</h1>;
